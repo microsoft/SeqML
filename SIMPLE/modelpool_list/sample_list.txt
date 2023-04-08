@@ -1,0 +1,14 @@
+(pretrainedmodels)alexnet
+(pretrainedmodels)densenet121
+(pretrainedmodels)densenet169
+(pretrainedmodels)densenet201
+(pretrainedmodels)dpn68
+(pretrainedmodels)nasnetamobile
+(pretrainedmodels)resnet18
+(pretrainedmodels)resnet34
+(pretrainedmodels)resnet50
+(pretrainedmodels)se_resnet50
+(pretrainedmodels)squeezenet1_0
+(pretrainedmodels)squeezenet1_1
+(clip)ViT-B/16
+(clip)ViT-B/32
