@@ -3,7 +3,8 @@
 This repository contains code for a series of research projects about [Machine Intelligence on Sequence Data](https://seqml.github.io/).
 
 ## News
-* TBD
+* 2023.4.8 [SIMPLE: Specialized Model-Sample Matching for Domain Generalization](https://seqml.github.io/simple/) is now available in [SIMPLE](SIMPLE).
+* 2023.4.8 [Towards Inference Efficient Deep Ensemble Learning](https://seqml.github.io/irene/) is now available in [IRENE](IRENE).
 
 ## Contributing
 
