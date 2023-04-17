@@ -4,7 +4,7 @@ This repository contains code for a series of research projects about [Machine I
 
 ## News
 
-- 2023.4.17 [Learning Decomposed Spatial Relations for Multi-Variate Time-Series Modeling](https://seqml.github.io/srd/) is now available in [SRD](SRD).
+- 2023.4.17 [Learning Decomposed Spatial Relations for Multi-Variate Time-Series Modeling](https://seqml.github.io/srd/) is now available in [SRD](https://github.com/Arthur-Null/SRD/tree/main).
 - 2023.4.8 [SIMPLE: Specialized Model-Sample Matching for Domain Generalization](https://seqml.github.io/simple/) is now available in [SIMPLE](SIMPLE).
 - 2023.4.8 [Towards Inference Efficient Deep Ensemble Learning](https://seqml.github.io/irene/) is now available in [IRENE](IRENE).
 
