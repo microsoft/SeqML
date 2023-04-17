@@ -13,3 +13,6 @@
 [submodule "SIMPLE/miscellaneous/domainbed"]
 	path = SIMPLE/miscellaneous/domainbed
 	url = https://github.com/l6z1z9yemily/domainbed.git
+[submodule "SRD"]
+	path = SRD
+	url = git@github.com:Arthur-Null/SRD.git
