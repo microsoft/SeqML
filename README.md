@@ -3,12 +3,14 @@
 This repository contains code for a series of research projects about [Machine Intelligence on Sequence Data](https://seqml.github.io/).
 
 ## News
-* 2023.4.8 [SIMPLE: Specialized Model-Sample Matching for Domain Generalization](https://seqml.github.io/simple/) is now available in [SIMPLE](SIMPLE).
-* 2023.4.8 [Towards Inference Efficient Deep Ensemble Learning](https://seqml.github.io/irene/) is now available in [IRENE](IRENE).
+
+- 2023.4.17 [Learning Decomposed Spatial Relations for Multi-Variate Time-Series Modeling](https://seqml.github.io/srd/) is now available in [SRD](SRD).
+- 2023.4.8 [SIMPLE: Specialized Model-Sample Matching for Domain Generalization](https://seqml.github.io/simple/) is now available in [SIMPLE](SIMPLE).
+- 2023.4.8 [Towards Inference Efficient Deep Ensemble Learning](https://seqml.github.io/irene/) is now available in [IRENE](IRENE).
 
 ## Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+This project welcomes contributions and suggestions. Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
 the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
 
@@ -22,8 +24,8 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
+trademarks or logos is subject to and must follow
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
