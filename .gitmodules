@@ -1,18 +1,24 @@
 [submodule "IRENE/torchensemble"]
+	branch = master
 	path = IRENE/torchensemble
 	url = https://github.com/l6z1z9yemily/torchensemble.git
 [submodule "IRENE/models"]
+	branch = master
 	path = IRENE/models
 	url = https://github.com/l6z1z9yemily/pytorch-cifar.git
 [submodule "SIMPLE/miscellaneous/clip"]
+	branch = main
 	path = SIMPLE/miscellaneous/clip
 	url = https://github.com/l6z1z9yemily/clip.git
 [submodule "SIMPLE/miscellaneous/model"]
+	branch = main
 	path = SIMPLE/miscellaneous/model
 	url = https://github.com/l6z1z9yemily/pytorch-image-models.git
 [submodule "SIMPLE/miscellaneous/domainbed"]
+	branch = main
 	path = SIMPLE/miscellaneous/domainbed
 	url = https://github.com/l6z1z9yemily/domainbed.git
 [submodule "SRD"]
+	branch = main
 	path = SRD
 	url = git@github.com:Arthur-Null/SRD.git
