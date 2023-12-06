@@ -13,9 +13,9 @@ pip install torchdiffeq
 pip install torchcde
 ```
 
-### Reproduce the experimental result for interpolating continuous-time transformer
+## Reproduce the experimental result for interpolating continuous-time transformer
 
-Run the following command, `cc` controls the type of spirals, `0` for the first type, `1` for the second type, `2` for mixture (see Appendix C.1.1 for more information).
+Run the following command, where `cc` controls the type of spirals, `0` for the first type, `1` for the second type, `2` for mixture (see Appendix C.1.1 for more information).
 
 * For Neural ODE, please run
 
