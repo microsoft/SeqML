@@ -16,7 +16,7 @@ pip install torchcde
 
 ## Reproduce the experimental result for interpolating continuous-time function
 
-Run the following command, where `cc` controls the type of spirals, `0` for the first type, `1` for the second type, `2` for mixture (see Appendix C.1.1 for more information).
+Run the following command, where `cc` controls the type of spiral, `0` for the first type, `1` for the second type, `2` for mixture (see Appendix C.1.1 for more information).
 
 * For Neural ODE, please run
 
