@@ -1,6 +1,11 @@
 # ContiFormer: Continuous-Time Transformer for Irregular Time Series Modeling
+
 This is the code for our NeurIPS 2023 paper "[ContiFormer: Continuous-Time Transformer for Irregular Time Series Modeling](https://seqml.github.io/contiformer/)".
 
+## Updates
+
+- [2023/12/11] Support continuous-time function approximation task (Session 4.1) and UEA classification task (Session 4.2).
+ 
 ## Environment Dependencies
 
 `ContiFormer` is currently part of "[PhysioPro](https://github.com/microsoft/physiopro)" project, please first clone `PhysioPro` repo and set up the required environment.
@@ -12,16 +17,18 @@ Run the following command, where `cc` controls the type of spiral, `0` for the f
 * For Neural ODE, please run
 
 ```
-python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Neural_ODE --noise_a=0.02 --cc=1 --train_dir ./sprial_neuralode
+python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Neural_ODE --noise_a=0.02 --cc=2 --train_dir ./sprial_neuralode
 ```
 
 * For ContiFormer, please run
 
 ```
-python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Contiformer --noise_a=0.02 --cc=1 --train_dir ./spiral_contiformer
+python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Contiformer --noise_a=0.02 --cc=2 --train_dir ./spiral_contiformer
 ```
 
-The results and visualization data will be saved to `./sprial_neuralode` and `./spiral_contiformer`.
+The results and visualization data will be saved to `./sprial_neuralode` and `./spiral_contiformer`. 
+
+All the experimental results are averaged, i.e., `27, 42, 1024` (the same random seeds for other tasks), use `--seed` to set the seed.
 
 
 ## Reproduce the experimental result for irregular time series classification
@@ -37,7 +44,7 @@ unzip data/Multivariate2018_ts.zip -d data/
 rm data/Multivariate2018_ts.zip
 ```
 
-2. Run irregular time series classification task with `ContiFormer`
+2. Run irregular time series classification task with `ContiFormer` and `Heartbeat` dataset.
 
 ```bash
 # create the output directory
@@ -54,7 +61,7 @@ The results will be saved to `outputs/Multivariate2018_ts/Heartbeat` directory.
 
 #### Random seeds selection
 
-All the experimental results are averaged over three random seed, i.e., `27, 42, 1024` (the same random seeds for event prediction task). To obtain the result for `Heartbeat` dataset with 0.3 mask ratio, please run the following three commands.
+To obtain the result for `Heartbeat` dataset with 0.3 mask ratio under different random seeds, please run the following three commands.
 
 ```
 python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --runtime.seed 27
