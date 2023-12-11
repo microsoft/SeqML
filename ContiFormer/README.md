@@ -5,15 +5,6 @@ This is the code for our NeurIPS 2023 paper "[ContiFormer: Continuous-Time Trans
 
 `ContiFormer` is currently part of "[PhysioPro](https://github.com/microsoft/physiopro)" project, please first clone `PhysioPro` repo and set up the required environment.
 
-### Dependencies
-
-`ContiFormer` requires additional dependencies:
-
-```
-pip install torchdiffeq
-pip install torchcde
-```
-
 ## Reproduce the experimental result for interpolating continuous-time function
 
 Run the following command, where `cc` controls the type of spiral, `0` for the first type, `1` for the second type, `2` for mixture (see Appendix C.1.1 for more information).
