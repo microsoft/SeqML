@@ -3,6 +3,7 @@
 
 import os
 import argparse
+import math
 import random
 import logging
 import numpy as np
@@ -10,7 +11,10 @@ import numpy.random as npr
 import matplotlib
 import matplotlib.pyplot as plt
 import torch.optim as optim
-from .utils import *
+from torch import nn
+import torch
+import torchcde
+from physiopro.network.contiformer import AttrDict, EncoderLayer
 
 matplotlib.use('agg')
 
@@ -281,9 +285,9 @@ class NeuralODE(nn.Module):
             return loss
 
 
-class Contiformer(nn.Module):
+class ContiFormer(nn.Module):
     def __init__(self, obs_dim, device, batch_size=64):
-        super(Contiformer, self).__init__()
+        super(ContiFormer, self).__init__()
         args_ode = {
             'use_ode': True, 'actfn': 'tanh', 'layer_type': 'concat', 'zero_init': True,
             'atol': args.atol, 'rtol': args.rtol, 'method': args.method, 'regularize': False,
@@ -419,7 +423,7 @@ if __name__ == '__main__':
     if args.model_name == 'Neural_ODE':
         model = NeuralODE(obs_dim, device)
     elif args.model_name == 'Contiformer':
-        model = Contiformer(obs_dim, device)
+        model = ContiFormer(obs_dim, device)
     else:
         raise NotImplementedError
 
