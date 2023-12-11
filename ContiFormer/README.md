@@ -21,13 +21,13 @@ Run the following command, where `cc` controls the type of spiral, `0` for the f
 * For Neural ODE, please run
 
 ```
-python run.py --adjoint=1 --visualize=1 --niters=10000 --model_name Neural_ODE --noise_a=0.02 --cc=1 --train_dir ./sprial_neuralode
+python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Neural_ODE --noise_a=0.02 --cc=1 --train_dir ./sprial_neuralode
 ```
 
 * For ContiFormer, please run
 
 ```
-python run.py --adjoint=1 --visualize=1 --niters=10000 --model_name Contiformer --noise_a=0.02 --cc=1 ----train_dir ./spiral_contiformer
+python spiral.py --adjoint=1 --visualize=1 --niters=10000 --model_name Contiformer --noise_a=0.02 --cc=1 ----train_dir ./spiral_contiformer
 ```
 
 The results and visualization data will be saved to `./sprial_neuralode` and `./spiral_contiformer`.

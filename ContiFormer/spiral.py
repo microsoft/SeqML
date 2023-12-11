@@ -337,9 +337,9 @@ class ContiFormer(nn.Module):
             input = X.evaluate(orig_ts).float()
             orig_ts = torch.tensor(orig_ts).to(input.device)
 
-            non_pad_mask = torch.ones(self.batch_size, ls, 1).to(input.device)
+            mask = torch.zeros(self.batch_size, ls, 1).to(input.device)
             out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(self.batch_size, 1).float(),
-                                  non_pad_mask=non_pad_mask)
+                                  mask=mask)
             return self.lin_out(out), sample_idx
         else:
             bs, ls = samples.shape[0], len(orig_ts)
@@ -353,8 +353,8 @@ class ContiFormer(nn.Module):
             input = X.evaluate(orig_ts).float()
             orig_ts = torch.tensor(orig_ts).to(input.device)
 
-            non_pad_mask = torch.ones(bs, ls, 1).to(input.device)
-            out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(bs, 1).float(), non_pad_mask=non_pad_mask)
+            mask = torch.zeros(bs, ls, 1).to(input.device)
+            out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(bs, 1).float(), mask=mask)
             return self.lin_out(out), None
 
     def calculate_loss(self, out, target):
