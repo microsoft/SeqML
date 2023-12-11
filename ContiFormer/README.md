@@ -73,7 +73,7 @@ python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml
 
 #### Hyper-parameter search
 
-We provided hyper-parameter searching for all the compared methods. Taking Contiformer model as an example, we search activation function in `sigmoid` and `tanh` (please refer to Appendix D.4 for more information), and report the best performance for each dataset.
+We provided hyper-parameter searching for all the compared methods. Taking ContiFormer model as an example, we search activation function in `sigmoid` and `tanh` (please refer to Appendix D.4 for more information), and report the best performance for each dataset.
 
 To perform hyper-parameter search for the activation function, please run the following commands:
 
