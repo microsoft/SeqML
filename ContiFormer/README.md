@@ -78,8 +78,8 @@ We provided hyper-parameter searching for all the compared methods. Taking Conti
 To perform hyper-parameter search for the activation function, please run the following commands:
 
 ```
-python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --model.actfn_ode sigmoid
-python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --model.actfn_ode tanh
+python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --network.actfn_ode sigmoid
+python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --network.actfn_ode tanh
 ```
 
 ## Reference
