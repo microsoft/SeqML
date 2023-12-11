@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import math
 from inspect import signature
 import torch.nn.functional as F

@@ -63,7 +63,7 @@ The results will be saved to `outputs/Multivariate2018_ts/Heartbeat` directory.
 
 #### Random seeds selection
 
-All the experimental results are averaged over three random seed, i.e., `27, 42, 1024` (same random seeds for event prediction task). To obtain the result for `Heartbeat` dataset with 0.3 mask ratio, please run the following three commands.
+All the experimental results are averaged over three random seed, i.e., `27, 42, 1024` (the same random seeds for event prediction task). To obtain the result for `Heartbeat` dataset with 0.3 mask ratio, please run the following three commands.
 
 ```
 python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --runtime.seed 27
@@ -73,7 +73,7 @@ python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml
 
 #### Hyper-parameter search
 
-We conduct simple hyper-parameter search for ContiFormer to obtain better performance. Specifically, we search activation function in `sigmoid` and `tanh` (please refer to Appendix D.4 for more information), and report the best performance for each dataset.
+We provided hyper-parameter searching for all the compared methods. Taking Contiformer model as an example, we search activation function in `sigmoid` and `tanh` (please refer to Appendix D.4 for more information), and report the best performance for each dataset.
 
 To perform hyper-parameter search for the activation function, please run the following commands:
 
@@ -83,6 +83,7 @@ python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml
 ```
 
 ## Reference
+
 You are more than welcome to cite our paper:
 ```
 @inproceedings{chen2023contiformer,

@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 import os
 import argparse
 import random
@@ -222,7 +225,7 @@ class NeuralODE(nn.Module):
 
     def forward(self, samples, orig_ts, **kwargs):
         if kwargs.get('is_train', False):
-            bs, ls = samples.shape[0], len(orig_ts)
+            bs, _ = samples.shape[0], len(orig_ts)
             sample_idx = npr.choice(bs, self.batch_size, replace=False)
             samples = samples[sample_idx, ...]
             h = self.rec.initHidden().to(device).repeat(samples.shape[0], 1)
