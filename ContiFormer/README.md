@@ -4,7 +4,7 @@ This is the code for our NeurIPS 2023 paper "[ContiFormer: Continuous-Time Trans
 
 ## Updates
 
-- [2023/12/11] Support continuous-time function approximation task (Session 4.1) and UEA classification task (Session 4.2).
+- [2023/12/11] Support continuous-time function approximation task (Section 4.1) and UEA classification task (Section 4.2).
  
 ## Environment Dependencies
 
