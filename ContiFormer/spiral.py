@@ -228,24 +228,37 @@ class NeuralODE(nn.Module):
         self.batch_size = batch_size
 
     def forward(self, samples, orig_ts, **kwargs):
-        sample_idx = None
-        bs, _ = samples.shape[0], len(orig_ts)
         if kwargs.get('is_train', False):
+            bs, _ = samples.shape[0], len(orig_ts)
             sample_idx = npr.choice(bs, self.batch_size, replace=False)
             samples = samples[sample_idx, ...]
-        h = self.rec.initHidden().to(device).repeat(samples.shape[0], 1)
+            h = self.rec.initHidden().to(device).repeat(samples.shape[0], 1)
 
-        for t in reversed(range(samples.size(1))):
-            obs = samples[:, t, :]
-            out, h = self.rec.forward(obs, h)
-        qz0_mean, qz0_logvar = out[:, :self.latent_dim], out[:, self.latent_dim:]
-        epsilon = torch.randn(qz0_mean.size()).to(device)
-        z0 = epsilon * torch.exp(.5 * qz0_logvar) + qz0_mean
+            for t in reversed(range(samples.size(1))):
+                obs = samples[:, t, :]
+                out, h = self.rec.forward(obs, h)
+            qz0_mean, qz0_logvar = out[:, :self.latent_dim], out[:, self.latent_dim:]
+            epsilon = torch.randn(qz0_mean.size()).to(device)
+            z0 = epsilon * torch.exp(.5 * qz0_logvar) + qz0_mean
 
-        # forward in time and solve ode for reconstructions
-        pred_z = odeint(self.func, z0, torch.tensor(orig_ts)).permute(1, 0, 2)
-        pred_x = self.dec(pred_z)
-        return pred_x, qz0_mean, qz0_logvar, sample_idx
+            # forward in time and solve ode for reconstructions
+            pred_z = odeint(self.func, z0, torch.tensor(orig_ts)).permute(1, 0, 2)
+            pred_x = self.dec(pred_z)
+            return pred_x, qz0_mean, qz0_logvar, sample_idx
+        else:
+            h = self.rec.initHidden().to(device).repeat(samples.shape[0], 1)
+
+            for t in reversed(range(samples.size(1))):
+                obs = samples[:, t, :]
+                out, h = self.rec.forward(obs, h)
+            qz0_mean, qz0_logvar = out[:, :self.latent_dim], out[:, self.latent_dim:]
+            epsilon = torch.randn(qz0_mean.size()).to(device)
+            z0 = epsilon * torch.exp(.5 * qz0_logvar) + qz0_mean
+
+            # forward in time and solve ode for reconstructions
+            pred_z = odeint(self.func, z0, torch.tensor(orig_ts)).permute(1, 0, 2)
+            pred_x = self.dec(pred_z)
+            return pred_x, qz0_mean, qz0_logvar, None
 
     def calculate_loss(self, out, target):
         pred_x, qz0_mean, qz0_logvar, idx = out
@@ -309,26 +322,40 @@ class ContiFormer(nn.Module):
         return input, t0
 
     def forward(self, samples, orig_ts, **kwargs):
-        sample_idx = None
-        bs, ls = samples.shape[0], len(orig_ts)
         if kwargs.get('is_train', False):
+            bs, ls = samples.shape[0], len(orig_ts)
             sample_idx = npr.choice(bs, self.batch_size, replace=False)
             samples = samples[sample_idx, ...]
 
-        t0 = samples[..., -1]
-        input = self.lin_in(samples[..., :-1])
-        input = (input + self.temporal_enc(t0)).float()
+            t0 = samples[..., -1]
+            input = self.lin_in(samples[..., :-1])
+            input = (input + self.temporal_enc(t0)).float()
 
-        _input, _t0 = self.pad_input(input, t0[0])
+            _input, _t0 = self.pad_input(input, t0[0])
 
-        X = torchcde.LinearInterpolation(_input, t=_t0)
-        input = X.evaluate(orig_ts).float()
-        orig_ts = torch.tensor(orig_ts).to(input.device)
+            X = torchcde.LinearInterpolation(_input, t=_t0)
+            input = X.evaluate(orig_ts).float()
+            orig_ts = torch.tensor(orig_ts).to(input.device)
 
-        mask = torch.zeros(self.batch_size, ls, 1).to(input.device)
-        out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(self.batch_size, 1).float(),
-                              mask=mask.bool())
-        return self.lin_out(out), sample_idx
+            mask = torch.zeros(self.batch_size, ls, 1).to(input.device)
+            out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(self.batch_size, 1).float(),
+                                  mask=mask.bool())
+            return self.lin_out(out), sample_idx
+        else:
+            bs, ls = samples.shape[0], len(orig_ts)
+            t0 = samples[..., -1]
+            input = self.lin_in(samples[..., :-1])
+            input = (input + self.temporal_enc(t0)).float()
+
+            _input, _t0 = self.pad_input(input, t0[0])
+
+            X = torchcde.LinearInterpolation(_input, t=_t0)
+            input = X.evaluate(orig_ts).float()
+            orig_ts = torch.tensor(orig_ts).to(input.device)
+
+            mask = torch.zeros(bs, ls, 1).to(input.device)
+            out, _ = self.encoder(input, orig_ts.unsqueeze(0).repeat(bs, 1).float(), mask=mask.bool())
+            return self.lin_out(out), None
 
     def calculate_loss(self, out, target):
         pred_x, idx = out
