@@ -4,8 +4,9 @@ This is the code for our NeurIPS 2023 paper "[ContiFormer: Continuous-Time Trans
 
 ## Updates
 
+- [2024/01/22] Support temporal point process task (Section 4.3).
 - [2023/12/11] Support continuous-time function approximation task (Section 4.1) and UEA classification task (Section 4.2).
- 
+
 ## Environment Dependencies
 
 `ContiFormer` is currently part of "[PhysioPro](https://github.com/microsoft/physiopro)" project, please first clone `PhysioPro` repo and set up the required environment.
@@ -78,6 +79,40 @@ To perform hyper-parameter search for the activation function, please run the fo
 ```
 python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --network.actfn_ode sigmoid
 python -m physiopro.entry.train docs/configs/contiformer_mask_classification.yml --data.mask_ratio 0.3 --data.name Heartbeat --network.actfn_ode tanh
+```
+
+## Reproduce the experimental result for temporal point process
+
+1. Download the dataset
+
+Please download the dataset from Google Drive [Link](https://drive.google.com/drive/folders/1SvHEiNuMH2lauQT5uYvNrdFoHi8ucSzx?usp=sharing), and put it under `data` fold.
+
+2. Run temporal point process task with `ContiFormer` on Neonate dataset
+
+```bash
+# create the output directory
+mkdir -p outputs/Temporal_Point_Process/neonate
+# run the train task
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml
+# tensorboard
+tensorboard --logdir outputs/
+```
+
+3. To change the fold, please add the following parameter
+
+```bash
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.fold fold1
+```
+
+4. For other datasets, please run the following commands
+
+```bash
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.name data_synthetic --model.lr 1e-2 --network.add_pe false --network.normalize_before false --network.actfn_ode sigmoid --network.layer_type_ode concatnorm --model.tmax 5 --model.step_size 100 --runtime.output_dir outputs/Temporal_Point_Process/synthetic
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.name data_mimic --model.lr 1e-3 --network.add_pe false --network.normalize_before true --network.actfn_ode sigmoid --network.layer_type_ode concatnorm --model.tmax 10 --model.step_size 20 --runtime.output_dir outputs/Temporal_Point_Process/mimic
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.name data_stackoverflow --model.lr 1e-3 --network.add_pe false --network.normalize_before false --network.actfn_ode sigmoid --network.layer_type_ode concat --model.tmax 10 --model.step_size 20  --runtime.output_dir outputs/Temporal_Point_Process/stackoverflow
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.name data_bookorder --model.lr 1e-3 --network.add_pe true --network.normalize_before false --network.actfn_ode sigmoid --network.layer_type_ode concatnorm --data.clip_max 70 --model.tmax 70 --model.step_size 20 --runtime.output_dir outputs/Temporal_Point_Process/bookorder
+python -m physiopro.entry.train docs/configs/contiformer_tpp_neonate.yml --data.name data_neonate --model.lr 1e-2 --network.add_pe false --network.normalize_before false --network.actfn_ode tanh --network.layer_type_ode concat --model.tmax 20 --model.step_size 20  --runtime.output_dir outputs/Temporal_Point_Process/neonate
+python -m physiopro.entry.train docs/configs/contiformer_tpp.yml --data.name data_traffic --model.lr 1e-3 --network.add_pe false --network.normalize_before false --network.actfn_ode sigmoid --network.layer_type_ode concat --model.tmax 5 --model.step_size 20  --runtime.output_dir outputs/Temporal_Point_Process/traffic
 ```
 
 ## Reference
